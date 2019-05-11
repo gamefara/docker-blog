@@ -1,0 +1,31 @@
+version: '3'
+services:
+    wordpress:
+        image: wordpress
+        container_name: wordpress
+        ports:
+            - '80:80'
+        depends_on:
+            - mysql
+        env_file: ./.env
+        restart: always
+        volumes:
+            - './data/wordpress:/var/www/html'
+        networks:
+            - blog_link
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        ports:
+            - 3306
+        env_file: ./.env
+        restart: always
+        volumes:
+            - './data/mysql:/var/lib/mysql'
+            - './utf8.cnf:/etc/mysql/conf.d/utf8.cnf'
+        networks:
+            - blog_link
+networks:
+    blog_link:
+        external:
+            name: blog_link
