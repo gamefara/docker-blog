@@ -8,5 +8,5 @@ if [ $# = 1 ]; then
         docker-compose exec mysql bash -c "mysql -D ${MYSQL_DATABASE} -u${MYSQL_USER} -p${MYSQL_PASSWORD}"
     fi
 else
-    echo '接続するコンテナを指定してください'
+    echo 'please "bash access_container.sh (container name)"'
 fi
