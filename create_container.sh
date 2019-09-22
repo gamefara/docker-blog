@@ -8,8 +8,8 @@ OUTPUT_WORDPRESS_DIRECTORY=${OUTPUT_COMMON_DIRECTORY}/wordpress
 sudo mkdir -p ${OUTPUT_WORDPRESS_DIRECTORY}
 sudo mkdir -p ${OUTPUT_MYSQL_DIRECTORY}
 
-sudo chcon -Rt svirt_sandbox_file_t ${OUTPUT_WORDPRESS_DIRECTORY}
-sudo chcon -Rt svirt_sandbox_file_t ${OUTPUT_MYSQL_DIRECTORY}
+#sudo chcon -Rt svirt_sandbox_file_t ${OUTPUT_WORDPRESS_DIRECTORY}
+#sudo chcon -Rt svirt_sandbox_file_t ${OUTPUT_MYSQL_DIRECTORY}
 
 # create network
 LINK_NAME=blog_link
