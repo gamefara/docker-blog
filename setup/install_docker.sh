@@ -1,15 +1,13 @@
 #!/bin/sh
 
 # newest version docker install
-curl -sSL http://get.docker.com/ | sh
+sudo yum install -y docker
+sudo yum update
+sudo service docker start
 docker version
 
 # exec docker, not "sudo"
 sudo usermod -aG docker ${USER}
-
-# auto exec
-sudo systemctl start docker
-sudo systemctl enable docker
 
 # docker-compose install
 VERSION=1.24.0
