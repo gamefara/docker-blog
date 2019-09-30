@@ -2,13 +2,9 @@
 
 bash ./rmi-container.sh
 
-OUTPUT_COMMON_DIRECTORY=./data
-OUTPUT_MYSQL_DIRECTORY=${OUTPUT_COMMON_DIRECTORY}/mysql
-OUTPUT_WORDPRESS_DIRECTORY=${OUTPUT_COMMON_DIRECTORY}/wordpress
-
-# mkdir
-sudo mkdir -p ${OUTPUT_WORDPRESS_DIRECTORY}
-sudo mkdir -p ${OUTPUT_MYSQL_DIRECTORY}
+. ./.env
+sudo mkdir -p ${WORDPRESS_DIRECTORY}
+sudo mkdir -p ${MYSQL_DIRECTORY} 
 
 # create network
 LINK_NAME=blog_link
