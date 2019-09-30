@@ -2,7 +2,7 @@
 
 # newest version docker install
 sudo yum install -y docker
-sudo yum update
+sudo yum update -y
 sudo service docker start
 docker version
 
