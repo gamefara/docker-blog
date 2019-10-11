@@ -1,10 +1,26 @@
 version: '3'
 services:
-    wordpress:
-        image: wordpress
-        container_name: wordpress
+    https-portal:
+        restart: always
+        image: steveltn/https-portal:1
         ports:
             - '80:80'
+            - '443:443'
+        links:
+            - wordpress
+        environment:
+            # change domain
+            DOMAINS: 'example.com -> http://wordpress:3080'
+            STAGE: 'production'
+            FORCE_RENEW: 'true'
+            WEBSOCKET: 'true'
+            CLIENT_MAX_BODY_SIZE: 0
+        volumes:
+            - ./.data/https-portal:/var/lib/https-portal
+    wordpress:
+        image: wordpress
+        ports:
+            - '3080:80'
         depends_on:
             - mysql
         environment:
@@ -14,12 +30,9 @@ services:
             - WORDPRESS_DB_PASSWORD=${_DB_PASS}
         restart: always
         volumes:
-            - './data/wordpress:/var/www/html'
-        networks:
-            - blog_link
+            - ./.data/wordpress:/var/www/html
     mysql:
         image: mysql:5.7
-        container_name: mysql
         ports:
             - 3306
         environment:
@@ -29,11 +42,5 @@ services:
             - MYSQL_PASSWORD=${_DB_PASS}
         restart: always
         volumes:
-            - './data/mysql:/var/lib/mysql'
-            - './utf8.cnf:/etc/mysql/conf.d/utf8.cnf'
-        networks:
-            - blog_link
-networks:
-    blog_link:
-        external:
-            name: blog_link
+            - ./.data/mysql:/var/lib/mysql
+            - ./utf8.cnf:/etc/mysql/conf.d/utf8.cnf
