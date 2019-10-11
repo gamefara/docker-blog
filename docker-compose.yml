@@ -10,7 +10,7 @@ services:
             - wordpress
         environment:
             # change domain
-            DOMAINS: 'example.com -> http://wordpress:3080'
+            DOMAINS: '${_DOMAIN_NAME} -> http://wordpress:3080'
             STAGE: 'production'
             FORCE_RENEW: 'true'
             WEBSOCKET: 'true'
