@@ -9,7 +9,6 @@ services:
         links:
             - wordpress
         environment:
-            # change domain
             DOMAINS: '${_DOMAIN_NAME} -> http://wordpress:3080'
             STAGE: 'production'
             FORCE_RENEW: 'true'
