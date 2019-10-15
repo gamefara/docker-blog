@@ -1,25 +1,9 @@
 version: '3'
 services:
-    https-portal:
-        restart: always
-        image: steveltn/https-portal:1
-        ports:
-            - '80:80'
-            - '443:443'
-        links:
-            - wordpress
-        environment:
-            DOMAINS: '${_DOMAIN_NAME} -> http://wordpress:8000'
-            STAGE: 'production'
-            FORCE_RENEW: 'true'
-            WEBSOCKET: 'true'
-            CLIENT_MAX_BODY_SIZE: 0
-        volumes:
-            - ./.data/https-portal:/var/lib/https-portal
     wordpress:
         image: wordpress
         ports:
-            - '8000:80'
+            - '80:80'
         depends_on:
             - mysql
         environment:
