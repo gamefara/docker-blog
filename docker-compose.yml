@@ -1,29 +1,11 @@
 version: '3'
 services:
-    wordpress:
-        image: wordpress
-        ports:
-            - '80:80'
-        depends_on:
-            - mysql
-        environment:
-            - WORDPRESS_DB_HOST=mysql:3306
-            - WORDPRESS_DB_NAME=${_DB_NAME}
-            - WORDPRESS_DB_USER=${_DB_USER}
-            - WORDPRESS_DB_PASSWORD=${_DB_PASS}
+    node:
+        build: docker/node
         restart: always
         volumes:
-            - ./.data/wordpress:/var/www/html
-    mysql:
-        image: mysql:5.7
-        ports:
-            - 3306
-        environment:
-            - MYSQL_ROOT_PASSWORD=${_DB_PASS}
-            - MYSQL_DATABASE=${_DB_NAME}
-            - MYSQL_USER=${_DB_USER}
-            - MYSQL_PASSWORD=${_DB_PASS}
-        restart: always
-        volumes:
-            - ./.data/mysql:/var/lib/mysql
-            - ./utf8.cnf:/etc/mysql/conf.d/utf8.cnf
+            - ./:/var/www
+        extra_hosts:
+            - "registry.npmjs.org:104.16.24.35"
+        tty: true
+
