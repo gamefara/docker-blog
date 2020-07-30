@@ -3,9 +3,12 @@ services:
     node:
         build: docker/node
         restart: always
+        ports:
+            - 8000:8000
+        environment:
+            - NODE_ENV=${NODE_ENV}
         volumes:
             - ./:/var/www
         extra_hosts:
             - "registry.npmjs.org:104.16.24.35"
         tty: true
-
